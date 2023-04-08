@@ -49,6 +49,7 @@ public class TaskOneV2 {
                     writer.println("Samogłoski: " + vowel);
                     writer.println("Spółgłoski: " + consonant);
                     writer.close();
+                    System.out.println("Został utworzoyny plik o nazwie: " + new_filename);
                     OK = true;
                 }    
 
