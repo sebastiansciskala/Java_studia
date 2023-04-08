@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.PrintWriter;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class TaskSecond {
@@ -26,11 +27,12 @@ public class TaskSecond {
                 new_filename = filename.substring(0, filename.lastIndexOf('.')) + ".stat";
                 handler = new File(filename);
                 scanline = new Scanner(handler);
+                ArrayList<Character> letters = new ArrayList<>();
+                ArrayList<String> words_to_sort = new ArrayList<>();
+                HashMap<String, Integer> word_count = new HashMap<>();
                 if (!scanline.hasNextLine())
                     throw new Exception("Plik jest pusty");
                 else {
-                    ArrayList<Character> letters = new ArrayList<>();
-                    HashMap<String, Integer> word_count = new HashMap<>();
                     int count;
                     for (char c = 'a'; c <= 'z'; c++)
                         letters.add(c);
@@ -52,12 +54,24 @@ public class TaskSecond {
                             }
                         } 
                     }
-                    System.out.print(word_count);
+                    System.out.println(word_count);
+                    for(int i = Collections.max(word_count.values()); i > 0; i--) {
+                        for (String key : word_count.keySet()) {
+                            if (word_count.get(key) == i)
+                                words_to_sort.add(key);
+                        }
+                        Collections.sort(words_to_sort);
+                        for (String sorted : words_to_sort) {
+                            System.out.println(sorted + " = " + i);  
+                        }
+
+                        
+                    }
+
                     OK = true;
                 }
             } catch (FileNotFoundException ex) {
                 System.err.println("Prawdopodobnie nie ma takiego pliku");
-                
             } catch (Exception ex) {
                 System.out.println("Zadanie nie zostało wykonane z powodu błędu:\n" 
                        +ex.getMessage());
