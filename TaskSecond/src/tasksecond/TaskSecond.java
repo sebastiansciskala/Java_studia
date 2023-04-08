@@ -3,8 +3,6 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -16,15 +14,12 @@ public class TaskSecond {
         Scanner scanner = new Scanner(System.in);
         Scanner scanline;
         File handler;
-        PrintWriter writer;
         String filename;
-        String new_filename;
         boolean OK = false;
         do
             try {
                 System.out.println("Podaj ścieżkę pliku wraz z rozszerzeniem");
                 filename = scanner.nextLine();
-                new_filename = filename.substring(0, filename.lastIndexOf('.')) + ".stat";
                 handler = new File(filename);
                 scanline = new Scanner(handler);
                 ArrayList<Character> letters = new ArrayList<>();
@@ -54,18 +49,15 @@ public class TaskSecond {
                             }
                         } 
                     }
-                    System.out.println(word_count);
                     for(int i = Collections.max(word_count.values()); i > 0; i--) {
                         for (String key : word_count.keySet()) {
                             if (word_count.get(key) == i)
                                 words_to_sort.add(key);
                         }
-                        Collections.sort(words_to_sort);
+                        Collections.sort(words_to_sort, String.CASE_INSENSITIVE_ORDER);
                         for (String sorted : words_to_sort) {
                             System.out.println(sorted + " = " + i);  
-                        }
-
-                        
+                        } 
                     }
 
                     OK = true;
